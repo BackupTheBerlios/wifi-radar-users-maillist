@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Wifi-radar-users] Wifi-Radar makes interface inaccessible
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/wifi-radar-users/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QAnt3Pr-ok_yEHzWpbHekK9PJrzWt3JH-LZY01TbbPA2w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Wifi-radar-users] Wifi-Radar makes interface inaccessible</H1>
+    <B>Sean Robinson</B> 
+    <A HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QAnt3Pr-ok_yEHzWpbHekK9PJrzWt3JH-LZY01TbbPA2w%40mail.gmail.com%3E"
+       TITLE="[Wifi-radar-users] Wifi-Radar makes interface inaccessible">seankrobinson at gmail.com
+       </A><BR>
+    <I>Fri Jul 20 17:58:39 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jul 12, 2012 at 7:53 AM, Haines Brown &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">haines at histomat.net</A>&gt; wrote:
+&gt;<i> On Thu, Jul 12, 2012 at 05:55:57AM -0700, Sean Robinson wrote:
+</I>&gt;&gt;<i> On Wed, Jul 11, 2012 at 2:16 PM, Haines Brown &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">haines at histomat.net</A>&gt; wrote:
+</I>&gt;&gt;<i> &gt; Setting up wifi on a new installation of debian squeeze on a Thinkpad
+</I>&gt;&gt;<i> &gt; X61s. I have wpasupplicant installed, but not being used because WPA
+</I>&gt;&gt;<i> &gt; is not yet enabled in my modem. I am not using any kind of network
+</I>&gt;&gt;<i> &gt; manager such as wicd.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; The wifi connection worked fine until I installed and started
+</I>&gt;&gt;<i> &gt; wifi-radar.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>   How were you able to get a wifi connection without wicd or wifi-radar?
+</I>&gt;<i>
+</I>&gt;<i> I go through a little scenario below, which shows that in fact I
+</I>&gt;<i> connect to my home AP successfully with neither a wicd or wifi-radar
+</I>&gt;<i> installed. I assume it is because in the wlan0 stanza in
+</I>&gt;<i> /etc/network/interfaces specifies my AP's ESSID.
+</I>
+  This indicates to me that you have some other WiFi management
+software running, which may be the source of the WR freeze.  WR is
+trying to access the WNIC (wireless card) at the same time as this
+other program and the card contention causes WR and the &quot;iwlist scan&quot;
+problems.  Do you have NetworkManager running?
+
+&gt;<i> Incidentally, I check if I have internet connection by running firefox
+</I>&gt;<i> and googling for a term. Surely there is a simple command line check
+</I>&gt;<i> to test if there is internet access. It is simple to ping my modem's
+</I>&gt;<i> IP address, but that only shows communication with the modem, not
+</I>&gt;<i> beyond it.
+</I>
+  I recommend ping www.google.com or traceroute www.google.com to look
+for outside machines.
+
+&gt;&gt;<i> This error comes from a broken configuration file (likely
+</I>&gt;&gt;<i> /etc/wifi-radar/wifi-radar.conf or /etc/wifi-radar.conf).  It probably
+</I>&gt;&gt;<i> was corrupted during the freeze when configuring.  Delete the
+</I>&gt;&gt;<i> configuration file and I believe WiFi Radar will start up.
+</I>&gt;<i>
+</I>&gt;<i> Here's the scenario that answers your questions and expans a bit on
+</I>&gt;<i> the problem.
+</I>&gt;<i>
+</I>&gt;<i> 1. I start no wicd installed, but with wpasupplicant installed and a
+</I>&gt;<i> broken wifi-radar. I do in fact under these conditions have a wifi
+</I>&gt;<i> internet connection.
+</I>
+  I suspect your wifi connection is not due to WR.
+
+&gt;<i> 2. In pursuing your suggestion, I discover there exists no
+</I>&gt;<i> /etc/wifi-radar/ directory. However, there is a /etc/wifi-radar.conf
+</I>&gt;<i> file. This not a pecularity of my distribution, for the wifi-radar man
+</I>&gt;<i> page says there should be a wifi-radar directory.
+</I>
+  The exact location of this file is distribution-specific.  As long
+as you know where it is so that you can delete it after a freeze, it's
+all good.
+
+&gt;<i>
+</I>&gt;<i> 4. Now a little scenario when I start wifi-radar with a pure new
+</I>&gt;<i> configuration file (this is a repeatable scenario). When started, the
+</I>&gt;<i> main window is empty, apparently because no scan has taken place yet.
+</I>&gt;<i> I can do # iwlist scan. In wifi-radar, it seems that closing the
+</I>&gt;<i> Preference window initiates a periodic scan routine, for my main
+</I>&gt;<i> window becomes populated with APs, including my own home AP. All have
+</I>&gt;<i> &quot;?&quot; icons because not configured, but all have strenth reports. So far
+</I>&gt;<i> so good, but then after a short while, the auto scan hangs, the signal
+</I>&gt;<i> strengh icons stop reporing strengh, I get a series of &quot;wlan0
+</I>&gt;<i> Interface doesn't support scanning: Device or reasource busy&quot; message
+</I>&gt;<i> in the terminal in which I started wifi-radar. I also can no longer
+</I>&gt;<i> run # iwlist scan without same error messages in its terminal. I
+</I>&gt;<i> proceed to select my AP, open and save Configure (without doing
+</I>&gt;<i> anything to change configuration), and my AP no longer has a &quot;?&quot;. It
+</I>&gt;<i> seems that when wifi-radar initiates a scan, the module scanning
+</I>&gt;<i> facility is for some reason already in use, but my ignorance about
+</I>&gt;<i> these matters is profound.
+</I>
+  &quot;wlan0 Interface doesn't support scanning: Device or resource busy&quot;
+means that iwlist cannot talk to the WNIC and WR calls iwlist for
+scanning.
+
+&gt;<i> 7. I reboot (without having wicp installed, and now also without
+</I>&gt;<i> wifi-radar), and when I come up, I automatically have wifi internet
+</I>&gt;<i> connection. The # iwlist scan command works.
+</I>
+  You may be able to enter &quot;ifconfig wlan0 down &amp;&amp; ifconfig wlan0 up&quot;
+in a root terminal rather than rebooting.  Your WNIC is reset on
+reboot which clears the iwlist problem.
+
+&gt;<i> 9. I try # iwlist scan, but it won't run because device or resource
+</I>&gt;<i> busy, and that error also being repeatedly reported now in the
+</I>&gt;<i> wifi-radar terminal. Prior to the periodic error messages there
+</I>&gt;<i> was info that scrolled out of the terminal window range (perhaps
+</I>&gt;<i> I should do a trace to capture it), but its last lines were:
+</I>&gt;<i>
+</I>&gt;<i>         ... Autentication Suites (1): PSK
+</I>&gt;<i>         IE: Unknown: 2A0100
+</I>&gt;<i>
+</I>&gt;<i> and then a bunch of lines starting with &quot;IE: Unnown:&quot; but followed
+</I>&gt;<i> by longer hex numbers.
+</I>
+  These are normal output from iwlist scan.
+
+&gt;<i> 10. Deleting the conf file and restarting wifi-radar does not help. I
+</I>&gt;<i> get some lines that scroll off and then reapeated Device or resource
+</I>&gt;<i> busy messages. When I close wifi-radar, this busy messagse are
+</I>&gt;<i> followed by:
+</I>&gt;<i>
+</I>&gt;<i>         Traceback (most recent all last)
+</I>&gt;<i>           File /usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>             line 935, in destroy self.status_window.destroy()
+</I>&gt;<i>           File /usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>             line 2522, in destroy self.dialog.destroy()
+</I>&gt;<i>         AttributeError: StatusWindow instance has no attribute 'dialog'
+</I>
+  This means the connect/disconnect status window was initialized but
+failed to fully start.  I believe this is unrelated to your problems
+connecting.
+
+&gt;<i> I'm ignorance about these things, but this sounds like it is just a
+</I>&gt;<i> normal shutdown of the window instance.
+</I>
+-- 
+Sean Robinson
+WiFi Radar - <A HREF="http://wifi-radar.berlios.de">http://wifi-radar.berlios.de</A>
+Python WiFi - <A HREF="http://pythonwifi.wikispot.org">http://pythonwifi.wikispot.org</A>
+pymnl - <A HREF="http://pymnl.wikispot.org">http://pymnl.wikispot.org</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">More information about the Wifi-radar-users
+mailing list</a><br>
+</body></html>

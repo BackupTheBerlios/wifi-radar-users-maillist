@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Wifi-radar-users] Wifi-Radar makes interface inaccessible
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/wifi-radar-users/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QBAVtucABv14cEEgBw9Q8z0vLBEC8rR3akb043u4NYMUA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000007.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Wifi-radar-users] Wifi-Radar makes interface inaccessible</H1>
+    <B>Sean Robinson</B> 
+    <A HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QBAVtucABv14cEEgBw9Q8z0vLBEC8rR3akb043u4NYMUA%40mail.gmail.com%3E"
+       TITLE="[Wifi-radar-users] Wifi-Radar makes interface inaccessible">seankrobinson at gmail.com
+       </A><BR>
+    <I>Sun Jul 29 16:27:38 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000007.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jul 20, 2012 at 5:09 PM, Haines Brown &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">haines at histomat.net</A>&gt; wrote:
+&gt;<i> On Fri, Jul 20, 2012 at 08:58:39AM -0700, Sean Robinson wrote:
+</I>&gt;&gt;<i> On Thu, Jul 12, 2012 at 7:53 AM, Haines Brown &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">haines at histomat.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> Sean, thanks for the feedback.
+</I>&gt;<i>
+</I>&gt;&gt;<i> &gt; I go through a little scenario below, which shows that in fact I
+</I>&gt;&gt;<i> &gt; connect to my home AP successfully with neither a wicd or
+</I>&gt;&gt;<i> &gt; wifi-radar installed. I assume it is because in the wlan0 stanza
+</I>&gt;&gt;<i> &gt; in /etc/network/interfaces specifies my AP's ESSID.
+</I>&gt;<i>
+</I>&gt;&gt;<i>   This indicates to me that you have some other WiFi management
+</I>&gt;&gt;<i> software running, which may be the source of the WR freeze.  WR is
+</I>&gt;&gt;<i> trying to access the WNIC (wireless card) at the same time as this
+</I>&gt;&gt;<i> other program and the card contention causes WR and the &quot;iwlist
+</I>&gt;&gt;<i> scan&quot; problems.  Do you have NetworkManager running?
+</I>&gt;<i>
+</I>&gt;<i> Your answer seems to imply that my supposition was wrong. That is, the
+</I>&gt;<i> stanza in the interfaces file specifying the ESSID is not in itself
+</I>&gt;<i> sufficient to bring the wireless up. So something is bringing it up.
+</I>&gt;<i> You suggest a network manager, but I don't have wifi-radar or wicd or
+</I>&gt;<i> network-manager or any other network manager that I know of installed.
+</I>&gt;<i>
+</I>&gt;<i> I rechecked by rebooting again without ethernet connection, and during
+</I>&gt;<i> the boot I was assigned an IP address by my wireless modem's DHCP, and
+</I>&gt;<i> once up I could ping www.google.com.
+</I>&gt;<i>
+</I>&gt;<i> I do a $ ps aux, and find this process:
+</I>&gt;<i>
+</I>&gt;<i>   dhclient -v -pf /var/run/dhclient.wlan0 pid -lf /var/lib/dhcp/dhclient.wlan0.leases wlan0
+</I>&gt;<i>
+</I>&gt;<i> I get another such process for eth0. I get the impression that
+</I>&gt;<i> dhclient does bring the interface up, but not sure. So the question
+</I>&gt;<i> is, how is my wireness connection being brought up, and if there is
+</I>&gt;<i> contention over the WNIC, how would I know the programs contending for
+</I>&gt;<i> it?
+</I>
+  This is a distribution-specific process (or, at least,
+sysinit-specific) and I do not have much experience with debian, so I
+can't help there.  Maybe someone else on the ML uses WR on debian and
+can answer?
+
+&gt;&gt;<i> &gt; 1. I start no wicd installed, but with wpasupplicant installed and
+</I>&gt;&gt;<i> &gt; a broken wifi-radar. I do in fact under these conditions have a
+</I>&gt;&gt;<i> &gt; wifi internet connection.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>   I suspect your wifi connection is not due to WR.
+</I>&gt;<i>
+</I>&gt;<i> But no wicd, no wifi-radar, no network-manager is installed. Is it
+</I>&gt;<i> possible some boot script is running ifup wlan0 automatically?
+</I>
+  My guess is that something in your boot process is bringing up the connection.
+
+&gt;&gt;<i> &gt; I can do # iwlist scan. In wifi-radar, it seems that closing the
+</I>&gt;&gt;<i> &gt; Preference window initiates a periodic scan routine, for my main
+</I>&gt;&gt;<i> &gt; window becomes populated with APs, including my own home AP. All
+</I>&gt;&gt;<i> &gt; have &quot;?&quot; icons because not configured, but all have strenth
+</I>&gt;&gt;<i> &gt; reports. So far so good, but then after a short while, the auto
+</I>&gt;&gt;<i> &gt; scan hangs, the signal strengh icons stop reporing strengh, I get
+</I>&gt;&gt;<i> &gt; a series of &quot;wlan0 Interface doesn't support scanning: Device or
+</I>&gt;&gt;<i> &gt; reasource busy&quot; message in the terminal in which I started
+</I>&gt;&gt;<i> &gt; wifi-radar. I also can no longer run # iwlist scan without same
+</I>&gt;&gt;<i> &gt; error messages in its terminal.
+</I>&gt;<i>
+</I>&gt;&gt;<i>   &quot;wlan0 Interface doesn't support scanning: Device or resource
+</I>&gt;&gt;<i> busy&quot; means that iwlist cannot talk to the WNIC and WR calls iwlist
+</I>&gt;&gt;<i> for scanning.
+</I>&gt;<i>
+</I>&gt;<i> To judge by my little scenario above, when wifi-radar starts and the
+</I>&gt;<i> Preferenes window is closed, it calls iwlist. But then when it tries
+</I>&gt;<i> to do it again, something else has grabbed the WNIC and iwlist has
+</I>&gt;<i> lost access to it. Is that your impression? If so, what is the best
+</I>&gt;<i> way to pin down this other program or process?
+</I>
+  I'm hoping someone on the list with debian experience can answer you.
+
+-- 
+Sean Robinson
+WiFi Radar - <A HREF="http://wifi-radar.berlios.de">http://wifi-radar.berlios.de</A>
+Python WiFi - <A HREF="http://pythonwifi.wikispot.org">http://pythonwifi.wikispot.org</A>
+pymnl - <A HREF="http://pymnl.wikispot.org">http://pymnl.wikispot.org</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000007.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8">[ date ]</a>
+              <a href="thread.html#8">[ thread ]</a>
+              <a href="subject.html#8">[ subject ]</a>
+              <a href="author.html#8">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">More information about the Wifi-radar-users
+mailing list</a><br>
+</body></html>

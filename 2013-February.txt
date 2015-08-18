@@ -1,0 +1,45 @@
+From seankrobinson at gmail.com  Sat Feb 23 15:43:47 2013
+From: seankrobinson at gmail.com (Sean Robinson)
+Date: Sat, 23 Feb 2013 07:43:47 -0700
+Subject: [Wifi-radar-users] Wifi radar
+In-Reply-To: <CAJVyj9ry8EE1anQxoKwJ1x1yVM=u7jmKFejHPxDtxgY2ZFHkhg@mail.gmail.com>
+References: <CAJVyj9ry8EE1anQxoKwJ1x1yVM=u7jmKFejHPxDtxgY2ZFHkhg@mail.gmail.com>
+Message-ID: <CAM6f8QA50hacpQuktVx3-_7hCkdcTLWGYXW68uwmKgRiMkeLYA@mail.gmail.com>
+
+M. Laouici,
+
+You might have received a faster response by asking your question on the
+mailing list.
+
+To answer your question: assuming your network uses WPA, see
+http://wifi-radar.berlios.de/v2.x/howto/wr-howto-wpa.html
+
+On Wed, Feb 13, 2013 at 7:47 PM, Zineb Laouici <zinebl.90 at gmail.com> wrote:
+
+>
+> hello developers of wifi radar for ubuntu
+>
+> i need help ;
+>
+> i use a wireless network connection of my university but my wifi radar
+> don't register the password of this WNC
+>
+> the problem is that it must register this password,the responsible don't
+> enter PW in each time that you wanna to connect.
+>
+> version WiFi Radar 2.0.s05.
+>
+> Cordially;
+>
+> Zineb
+>
+>
+>
+
+
+-- 
+Sean Robinson
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/wifi-radar-users/attachments/20130223/8743a51d/attachment.html>
+

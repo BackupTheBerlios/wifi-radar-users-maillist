@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Wifi-radar-users] Wifi-Radar makes interface inaccessible
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/wifi-radar-users/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QBH-LUwzwg5YzfsG2PXa1BydnvhNPZ1vjV%3DCmVFUzob_g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000003.html">
+   <LINK REL="Next"  HREF="000005.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Wifi-radar-users] Wifi-Radar makes interface inaccessible</H1>
+    <B>Sean Robinson</B> 
+    <A HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3CCAM6f8QBH-LUwzwg5YzfsG2PXa1BydnvhNPZ1vjV%3DCmVFUzob_g%40mail.gmail.com%3E"
+       TITLE="[Wifi-radar-users] Wifi-Radar makes interface inaccessible">seankrobinson at gmail.com
+       </A><BR>
+    <I>Thu Jul 12 14:55:57 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000003.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+        <LI>Next message: <A HREF="000005.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jul 11, 2012 at 2:16 PM, Haines Brown &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">haines at histomat.net</A>&gt; wrote:
+&gt;<i> Setting up wifi on a new installation of debian squeeze on a Thinkpad
+</I>&gt;<i> X61s. I have wpasupplicant installed, but not being used because WPA
+</I>&gt;<i> is not yet enabled in my modem. I am not using any kind of network
+</I>&gt;<i> manager such as wicd.
+</I>&gt;<i>
+</I>&gt;<i> The wifi connection worked fine until I installed and started
+</I>&gt;<i> wifi-radar.
+</I>
+  How were you able to get a wifi connection without wicd or wifi-radar?
+
+&gt;<i> At first wifi-radar seemed to work. It scanned, I created
+</I>&gt;<i> a profile for my home AP. Except it didn't report signal strenghs. But
+</I>&gt;<i> in fiddling to configure the profile (adding my AP's inet address,
+</I>&gt;<i> which made no sense to me to do), it hung, and since I couldn't
+</I>&gt;<i> bring the wlan0 interface up.
+</I>&gt;<i>
+</I>&gt;<i>   # /etc/init.d/networking restart
+</I>&gt;<i>   ...
+</I>&gt;<i>   Listening on LPF/wlan0/00:1f:3b:03:26:ab
+</I>&gt;<i>   Sending on  LPF/wlan0/00:1f:3b:03:26:ab
+</I>&gt;<i>   Sending on Socket/fallback
+</I>&gt;<i>   DHCPRELEASE on wlan0 to 192.168.1.254 port 67
+</I>&gt;<i>   DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 3
+</I>&gt;<i>   ...
+</I>&gt;<i>   No DHCOFFERS received
+</I>&gt;<i>   No working leases in persistent database - sleeping
+</I>&gt;<i>   done
+</I>&gt;<i>
+</I>&gt;<i> I try:
+</I>&gt;<i>
+</I>&gt;<i>   # iwlist scan
+</I>&gt;<i>   ...
+</I>&gt;<i>   wlan0  Interface doesn't support scanning: Device or resource busy
+</I>&gt;<i>
+</I>&gt;<i> I thought at first wifi-radar had somehow grabbed the interface and
+</I>&gt;<i> wouldn't go. However, when I kill wifi-radar and try to start it, it
+</I>&gt;<i> no longer starts, and I get:
+</I>&gt;<i>
+</I>&gt;<i>   # wifi-radar
+</I>&gt;<i>   Traceback (most recent call last)
+</I>&gt;<i>     File &quot;/usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>         line 2915, in &lt;module&gt; confFile.read()
+</I>&gt;<i>     File &quot;/usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>         line 2800, in read self.set_bool_opt( ap + 'known', True)
+</I>&gt;<i>     File &quot;/usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>         line 2713, in set_bool_opt self.set_opt(option_path, repr(value))
+</I>&gt;<i>     File &quot;/usr/sbin/wifi-radar&quot;,
+</I>&gt;<i>         line 2762, in set_opt (section, option) = option_path.split{'.')
+</I>&gt;<i>
+</I>&gt;<i> When I reboot, wifi is back working, including # iwlist scan. But
+</I>&gt;<i> wifi-radar seems broken, and I get the same errors as above.
+</I>&gt;<i>
+</I>
+  This error comes from a broken configuration file (likely
+/etc/wifi-radar/wifi-radar.conf or /etc/wifi-radar.conf).  It probably
+was corrupted during the freeze when configuring.  Delete the
+configuration file and I believe WiFi Radar will start up.
+
+  Please let the list know if this works or not.
+
+-- 
+Sean Robinson
+WiFi Radar - <A HREF="http://wifi-radar.berlios.de">http://wifi-radar.berlios.de</A>
+Python WiFi - <A HREF="http://pythonwifi.wikispot.org">http://pythonwifi.wikispot.org</A>
+pymnl - <A HREF="http://pymnl.wikispot.org">http://pymnl.wikispot.org</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000003.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+	<LI>Next message: <A HREF="000005.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">More information about the Wifi-radar-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Wifi-radar-users] Wifi-Radar makes interface inaccessible
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/wifi-radar-users/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3C20120711211601.GC9983%40histomat.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000004.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Wifi-radar-users] Wifi-Radar makes interface inaccessible</H1>
+    <B>Haines Brown</B> 
+    <A HREF="mailto:wifi-radar-users%40lists.berlios.de?Subject=Re%3A%20%5BWifi-radar-users%5D%20Wifi-Radar%20makes%20interface%20inaccessible&In-Reply-To=%3C20120711211601.GC9983%40histomat.net%3E"
+       TITLE="[Wifi-radar-users] Wifi-Radar makes interface inaccessible">haines at histomat.net
+       </A><BR>
+    <I>Wed Jul 11 23:16:01 CEST 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000004.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3">[ date ]</a>
+              <a href="thread.html#3">[ thread ]</a>
+              <a href="subject.html#3">[ subject ]</a>
+              <a href="author.html#3">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Setting up wifi on a new installation of debian squeeze on a Thinkpad 
+X61s. I have wpasupplicant installed, but not being used because WPA 
+is not yet enabled in my modem. I am not using any kind of network 
+manager such as wicd.
+
+The wifi connection worked fine until I installed and started 
+wifi-radar. At first wifi-radar seemed to work. It scanned, I created
+a profile for my home AP. Except it didn't report signal strenghs. But
+in fiddling to configure the profile (adding my AP's inet address,
+which made no sense to me to do), it hung, and since I couldn't
+bring the wlan0 interface up. 
+
+  # /etc/init.d/networking restart
+  ...
+  Listening on LPF/wlan0/00:1f:3b:03:26:ab  
+  Sending on  LPF/wlan0/00:1f:3b:03:26:ab
+  Sending on Socket/fallback
+  DHCPRELEASE on wlan0 to 192.168.1.254 port 67
+  DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 3
+  ...
+  No DHCOFFERS received
+  No working leases in persistent database - sleeping
+  done
+
+I try:
+
+  # iwlist scan
+  ...
+  wlan0  Interface doesn't support scanning: Device or resource busy
+  
+I thought at first wifi-radar had somehow grabbed the interface and 
+wouldn't go. However, when I kill wifi-radar and try to start it, it 
+no longer starts, and I get:
+
+  # wifi-radar
+  Traceback (most recent call last)
+    File &quot;/usr/sbin/wifi-radar&quot;, 
+	line 2915, in &lt;module&gt; confFile.read()
+    File &quot;/usr/sbin/wifi-radar&quot;, 
+	line 2800, in read self.set_bool_opt( ap + 'known', True)
+    File &quot;/usr/sbin/wifi-radar&quot;,
+	line 2713, in set_bool_opt self.set_opt(option_path, repr(value))
+    File &quot;/usr/sbin/wifi-radar&quot;, 
+        line 2762, in set_opt (section, option) = option_path.split{'.')
+
+When I reboot, wifi is back working, including # iwlist scan. But 
+wifi-radar seems broken, and I get the same errors as above. 
+
+Haines Brown
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000004.html">[Wifi-radar-users] Wifi-Radar makes interface inaccessible
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3">[ date ]</a>
+              <a href="thread.html#3">[ thread ]</a>
+              <a href="subject.html#3">[ subject ]</a>
+              <a href="author.html#3">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/wifi-radar-users">More information about the Wifi-radar-users
+mailing list</a><br>
+</body></html>
